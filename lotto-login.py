@@ -1,8 +1,11 @@
+import datetime
 import tkinter as tk
+import rsaidnumber
 from tkinter import *
 from tkinter import messagebox
-import datetime
-date = datetime.datetime.now()
+from datetime import *
+
+date = datetime.now()
 
 window = tk.Tk()
 window.geometry("460x360")
@@ -14,6 +17,11 @@ def erase():
     email_entry.delete(0, "end")
     ID_entry.delete(0, "end")
 
+def check():
+    user_id = ID_entry
+    year = user_id[:2]
+    if year >= "22":
+        year = "19" + year
 
 name_label = Label(window, text="Name:")
 name_label.place(x=100, y=50)
