@@ -10,55 +10,8 @@ window = tk.Tk()
 window.geometry("700x500")
 window.title("Ithuba National Lottery:Lotto machine")
 lotto_rand = sample(range(1, 49), 6)
+lotto_rand.sort()
 print(lotto_rand)
-
-
-def generate():
-    try:
-        user_num = [int(lotto_num1.get()), int(lotto_num2.get()), int(lotto_num3.get()),
-                    int(lotto_num4.get()), int(lotto_num5.get()), int(lotto_num6.get())]
-        print(user_num)
-        x = set(user_num).intersection(lotto_rand)
-        print(len(x))
-
-        if len(x) == 0:
-            results.config(text="Your numbers were: " + str(user_num) + "\n" +
-                                "And the winning numbers are: " +
-                                str(lotto_rand) + "\n" + " You earned R0" +
-                           "\n" + str(date))
-        if len(x) == 1:
-            results.config(text="Your numbers were: " + str(user_num) + "\n" +
-                                "And the winning numbers are: " +
-                                str(lotto_rand) + "\n" + "You earned R0" +
-                           "\n" + str(date))
-        if len(x) == 2:
-            results.config(text="Your numbers were: " + str(user_num) + "\n" +
-                                "And the winning numbers are: " +
-                                str(lotto_rand) + "\n" + "You earned R20.00" +
-                           "\n" + str(date))
-        if len(x) == 3:
-            results.config(text="Your numbers were: " + str(user_num) + "\n" +
-                                "And the winning numbers are: " +
-                                str(lotto_rand) + "\n" + "You earned R100.50" +
-                           "\n" + str(date))
-        if len(x) == 4:
-            results.config(text="Your numbers were: " + str(user_num) + "\n" +
-                                "And the winning numbers are: " +
-                                str(lotto_rand) + "\n" + "You earned R2384.00" +
-                           "\n" + str(date))
-        if len(x) == 5:
-            results.config(text="Your numbers were: " + str(user_num) + "\n" +
-                                "And the winning numbers are: " +
-                                str(lotto_rand) + "\n" + "You earned R8584.00" +
-                           "\n" + str(date))
-        if len(x) == 6:
-            results.config(text="Your numbers were: " + str(user_num) + "\n" +
-                                "And the winning numbers are: " +
-                                str(lotto_rand) + "\n" + "Congratulations You've won the jackpot and earned "
-                                                         "R10000000.00" + "\n" + str(date))
-    finally:
-        messagebox.showinfo("Thank you", "Thank you for playing select an option below")
-
 
 # Labels
 
@@ -66,7 +19,7 @@ lotto_lbl = Label(window, text="Choose your numbers")
 lotto_lbl.place(x=250, y=20)
 lottoNum_label = Label(window, text="Lotto Number Generator")
 lottoNum_label.place(x=240, y=70)
-results = Label(window, text="results:")
+results = Entry(window, width=20, height=20)
 results.place(x=290, y=160)
 
 # lotto number sets
@@ -102,7 +55,7 @@ def remove():
 
 # The buttons
 
-play_button = Button(window, text="PLAY", command=generate)
+play_button = Button(window, text="PLAY")
 play_button.place(x=30, y=450)
 playAgain_button = Button(window, text="Play Again", command=remove)
 playAgain_button.place(x=100, y=450)

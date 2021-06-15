@@ -26,6 +26,7 @@ accountNumber_entry.place(x=260, y=130)
 
 
 def clear():
+    bank_select.(0, "end")
     accountHolder_entry.delete(0, "end")
     accountNumber_entry.delete(0, "end")
 
