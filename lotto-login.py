@@ -31,6 +31,8 @@ def check():
 
     if len(user_id) != 13:
         messagebox.showerror("Error", "Please enter valid ID number")
+    elif len(user_id) == 0:
+        messagebox.showwarning("Warning", "Please fill out the ID form")
     elif age >= 18:
         messagebox.showinfo("Welcome", "Let's Play")
         window.destroy()
