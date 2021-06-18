@@ -2,7 +2,6 @@ import random
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
-from random import sample
 import datetime
 
 counter = 1
@@ -53,18 +52,34 @@ set02.sort()
 set03.sort()
 
 
+def retry():
+    results.destroy()
+    lotto_num1.delete(0, "end")
+    lotto_num1.insert(1, 1)
+    lotto_num2.delete(0, "end")
+    lotto_num2.insert(1, 1)
+    lotto_num3.delete(0, "end")
+    lotto_num3.insert(1, 1)
+    lotto_num4.delete(0, "end")
+    lotto_num4.insert(1, 1)
+    lotto_num5.delete(0, "end")
+    lotto_num5.insert(1, 1)
+    lotto_num6.delete(0, "end")
+    lotto_num6.insert(1, 1)
+
+
 def generate():
     number = [i for i in range(1, 50)]
     random.shuffle(number)
-    nums = number[:6]
+    rand_nums = number[:6]
     print(number)
-    print(nums)
+    print(rand_nums)
 
     try:
         lotto_nums = [int(lotto_num1.get()), int(lotto_num2.get()), int(lotto_num3.get()), int(lotto_num4.get()),
                       int(lotto_num5.get()), int(lotto_num6.get())]
         print(lotto_nums)
-        matched_list = list(set(nums).intersection(lotto_nums))
+        matched_list = list(set(rand_nums).intersection(lotto_nums))
         print(matched_list)
         matched_numbers = len(matched_list)
         print(matched_numbers)
@@ -92,10 +107,11 @@ def generate():
             messagebox.showinfo("Complete", "You have used all 3 of your turns")
         else:
             messagebox.showinfo("Finished", "Round ended")
-        results.config(text="You have " + str(matched_numbers) + " match(es) and you won R" + str(list(lotto_prizes.values())[matched_numbers]) +
-                       "\n" + "Your numbers were: " + str(lotto_nums) + "\n" +
-                       "And the winning numbers are: " + str(nums) + "\n" +
-                       str(date))
+        results.config(text="You have " + str(matched_numbers) + " match(es) and you won R" + str(
+            list(lotto_prizes.values())[matched_numbers]) +
+                            "\n" + "Your numbers were: " + str(lotto_nums) + "\n" +
+                            "And the winning numbers are: " + str(rand_nums) + "\n" +
+                            str(date))
 
 
 def remove():
@@ -117,7 +133,7 @@ def remove():
 
 play_button = Button(window, text="PLAY", command=generate)
 play_button.place(x=30, y=450)
-playAgain_button = Button(window, text="Play Again")
+playAgain_button = Button(window, text="Play Again", command=retry)
 playAgain_button.place(x=100, y=450)
 claim_button = Button(window, text="Claim Prize")
 claim_button.place(x=300, y=450)

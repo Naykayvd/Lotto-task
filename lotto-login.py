@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from datetime import *
+import email_validator
 
 date = datetime.now()
 
@@ -17,29 +18,36 @@ def erase():
 
 
 def check():
-    user_id = ID_entry.get()
-    year = user_id[:2]
-    if year >= "22":
-        year = "19" + year
-    else:
-        year = "20" + year
-    month = user_id[2:4]
-    day = user_id[4:6]
-    today = date.today()
+    try:
+        user_email = email_entry.get()
+        valid = email_validator.validate_email(user_email)
+        user_email = valid.email
+        
+        user_id = ID_entry.get()
+        year = user_id[:2]
+        if year >= "22":
+            year = "19" + year
+        else:
+            year = "20" + year
+        month = user_id[2:4]
+        day = user_id[4:6]
+        today = date.today()
 
-    age = today.year - int(year) - ((today.month, today.day) < (int(month), int(day)))
+        age = today.year - int(year) - ((today.month, today.day) < (int(month), int(day)))
 
-    if len(user_id) != 13:
-        messagebox.showerror("Error", "Please enter valid ID number")
-    elif len(user_id) == 0:
-        messagebox.showwarning("Warning", "Please fill out the ID form")
-    elif age >= 18:
-        messagebox.showinfo("Welcome", "Let's Play")
-        window.destroy()
-        import lotto_game
-    else:
-        age = 18 - age
-        messagebox.showerror("Warning", "You are too young to play. Please try again in " + str(age) + " years")
+        if len(user_id) != 13:
+            messagebox.showerror("Error", "Please enter valid ID number")
+        elif len(user_id) == 0:
+            messagebox.showwarning("Warning", "Please fill out the ID form")
+        elif age >= 18:
+            messagebox.showinfo("Welcome", "Let's Play")
+            window.destroy()
+            import lotto_game
+        else:
+            age = 18 - age
+            messagebox.showerror("Warning", "You are too young to play. Please try again in " + str(age) + " years")
+    except email_validator.EmailNotValidError:
+        messagebox.showerror("Email Verification", "Please fill in a proper email address")
 
 
 name_label = Label(window, text="Name:")
