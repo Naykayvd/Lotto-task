@@ -53,7 +53,9 @@ set03.sort()
 
 
 def retry():
-    results.destroy()
+    global counter
+    counter = 1
+    results["text"] = ""
     lotto_num1.delete(0, "end")
     lotto_num1.insert(1, 1)
     lotto_num2.delete(0, "end")
