@@ -115,6 +115,11 @@ def generate():
                             "And the winning numbers are: " + str(rand_nums) + "\n" +
                             str(date))
 
+        c = open("results.txt", "w+")
+        c.close()
+        c = open("results.txt", "a")
+        c.write(results.cget("text"))
+
 
 def remove():
     lotto_num1.delete(0, "end")

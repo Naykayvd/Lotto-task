@@ -1,8 +1,10 @@
+import random
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from datetime import *
 import email_validator
+from random import sample
 
 date = datetime.now()
 
@@ -25,6 +27,8 @@ def check():
         
         user_id = ID_entry.get()
         year = user_id[:2]
+        playerID = (user_id[6:13])
+
         if year >= "22":
             year = "19" + year
         else:
@@ -40,7 +44,7 @@ def check():
         elif len(user_id) == 0:
             messagebox.showwarning("Warning", "Please fill out the ID form")
         elif age >= 18:
-            messagebox.showinfo("Welcome", "Let's Play")
+            messagebox.showinfo("Welcome", "Let's Play" + "\n" + "\n" + "Your player ID is " + str(playerID))
             window.destroy()
             import lotto_game
         else:
