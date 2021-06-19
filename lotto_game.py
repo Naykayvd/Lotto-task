@@ -74,6 +74,7 @@ def generate():
     number = [i for i in range(1, 50)]
     random.shuffle(number)
     rand_nums = number[:6]
+    print(totals)
     print(number)
     print(rand_nums)
 
@@ -114,6 +115,16 @@ def generate():
                             "\n" + "Your numbers were: " + str(lotto_nums) + "\n" +
                             "And the winning numbers are: " + str(rand_nums) + "\n" +
                             str(date))
+
+        a = open("results.txt", "w+")
+        a.close()
+        a = open("results.txt", "a")
+        a.write(results.cget("text"))
+
+        b = open("results.txt", "w+")
+        b.close()
+        b = open("results.txt", "a")
+        b.write(results.cget("text"))
 
         c = open("results.txt", "w+")
         c.close()

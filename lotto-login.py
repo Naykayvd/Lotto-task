@@ -4,7 +4,6 @@ from tkinter import *
 from tkinter import messagebox
 from datetime import *
 import email_validator
-from random import sample
 
 date = datetime.now()
 
