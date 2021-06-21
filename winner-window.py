@@ -2,6 +2,8 @@ import smtplib
 import tkinter as tk
 from email import encoders
 from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from tkinter import *
 from tkinter import messagebox
 
@@ -30,16 +32,19 @@ def send():
         password = "n@#umvd98"
         s.starttls()
         s.login(sender, password)
-        message = str(accountHolder_entry.get()) + "\n" + str(accountNumber_entry.get())
-        message = message + str(bank_select.cget(bankOptions))
-        s.sendmail(sender, receiver, message)
-        filename = "results.txt"
-        with open(filename, "rb") as attachment:
-            part = MIMEBase("application", "octet-stream")
-            part.set_payload(attachment.read())
-        encoders.encode_base64(part)
-        part.add_header("Your results", f"attachment; filename = {filename}")
+        msg = str(accountHolder_entry.get()) + "\n" + str(accountNumber_entry.get()) + "\n" + str(bank_select.cget(bankOptions))
+        message = MIMEMultipart()
+        message.attach(MIMEText(msg, 'plain'))
+        attach_name = "results.txt"
+        attach_file = open(attach_name, "rb")
+        payload = MIMEBase("application", "octate-stream")
+        payload.set_payload((attach_file).read())
+        encoders.encode_base64(payload)
+        payload.add_header('Content-Decomposition', 'attachment', filename=attach_name)
+        message.attach(payload)
+        s.sendmail(sender, receiver, msg)
         print("email sent")
+        s.quit()
     except email_validator.EmailNotValidError:
         messagebox.showerror("Email Verification", "Please fill in a proper email address")
     finally:
