@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from datetime import *
+from playsound import playsound
 import email_validator
 
 date = datetime.now()
@@ -13,6 +14,7 @@ window.title("Ithuba National Lottery Login")
 
 
 def erase():
+    playsound("beep_beep.mp3")
     name_entry.delete(0, "end")
     email_entry.delete(0, "end")
     ID_entry.delete(0, "end")
@@ -40,10 +42,13 @@ def check():
 
         if len(user_id) != 13:
             messagebox.showerror("Error", "Please enter valid ID number")
+            playsound('beep_beep.mp3')
         elif len(user_id) == 0:
             messagebox.showwarning("Warning", "Please fill out the ID form")
+            playsound('beep_beep.mp3')
         elif age >= 18:
             messagebox.showinfo("Welcome", "Let's Play" + "\n" + "\n" + "Your player ID is " + str(playerID))
+            playsound('beep_beep.mp3')
             window.destroy()
             import lotto_game
         else:

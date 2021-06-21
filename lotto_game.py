@@ -2,6 +2,7 @@ import random
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
+from playsound import playsound
 import datetime
 
 counter = 1
@@ -52,7 +53,14 @@ set02.sort()
 set03.sort()
 
 
+def claim():
+    playsound('cha_ching.mp3')
+    window.destroy()
+    import prize_claim
+
+
 def retry():
+    playsound('beep_beep.mp3')
     global counter
     counter = 1
     results["text"] = ""
@@ -109,6 +117,7 @@ def generate():
         if counter > 3:
             messagebox.showinfo("Complete", "You have used all 3 of your turns")
         else:
+            playsound('clap.mp3')
             messagebox.showinfo("Finished", "Round ended")
         results.config(text="You have " + str(matched_numbers) + " match(es) and you won R" + str(
             list(lotto_prizes.values())[matched_numbers]) +
@@ -133,6 +142,7 @@ def generate():
 
 
 def remove():
+    playsound('beep_beep.mp3')
     lotto_num1.delete(0, "end")
     lotto_num1.insert(1, 1)
     lotto_num2.delete(0, "end")
@@ -153,7 +163,7 @@ play_button = Button(window, text="PLAY", command=generate)
 play_button.place(x=30, y=450)
 playAgain_button = Button(window, text="Play Again", command=retry)
 playAgain_button.place(x=100, y=450)
-claim_button = Button(window, text="Claim Prize")
+claim_button = Button(window, text="Claim Prize", command=claim)
 claim_button.place(x=300, y=450)
 clear_button = Button(window, text="CLEAR", command=remove)
 clear_button.place(x=540, y=450)

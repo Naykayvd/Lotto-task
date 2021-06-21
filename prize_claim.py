@@ -2,8 +2,6 @@ import smtplib
 import tkinter as tk
 from email import encoders
 from email.mime.base import MIMEBase
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 from tkinter import *
 from tkinter import messagebox
 
@@ -27,13 +25,13 @@ def send():
         user_email = valid.email
 
         s = smtplib.SMTP('smtp.gmail.com', 587)
-        sender = "mdummy137@gmail.com"
+        sender = "nahvandiemen@gmail.com"
         receiver = [email_entry.get()]
-        password = "password@20!"
+        password = "n@#umvd98"
         s.starttls()
-        s.login(sender,password)
-        message = str(accountHolder_entry.get()) + str(accountNumber_entry.get())
-        message = message + str(bank_select.cget())
+        s.login(sender, password)
+        message = str(accountHolder_entry.get()) + "\n" + str(accountNumber_entry.get())
+        message = message + str(bank_select.cget(bankOptions))
         s.sendmail(sender, receiver, message)
         filename = "results.txt"
         with open(filename, "rb") as attachment:
