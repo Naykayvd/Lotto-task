@@ -56,7 +56,7 @@ set03.sort()
 def claim():
     playsound('cha_ching.mp3')
     window.destroy()
-    import prize_claim
+    import winner_window
 
 
 def retry():
